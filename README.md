@@ -41,23 +41,33 @@ You can mix both options. Programmatic registration takes effect immediately and
 
 ## Required API Permissions
 
-When creating an API account in BigCommerce (**Settings → API Accounts → Create API Account**), grant the following scopes. Use **Read-Only** if your integration only reads data; use **Modify** if it writes (create/update/delete).
+When creating an API account in BigCommerce (**Settings → API Accounts → Create API Account**), configure the following OAuth scopes. Use **read-only** if your integration only reads data; use **modify** if it also writes (create/update/delete).
 
-| BigCommerce Scope | Read-Only | Modify | Modules |
-|---|:---:|:---:|---|
-| **Products** | GET calls | POST/PUT/DELETE | `products`, `variants`, `brands`, `categories`, `productOptions`, `images`, `priceLists`, and `metafields` on products/variants/categories/brands |
-| **Customers** | GET calls | POST/PUT/DELETE | `customers`, `customerGroups`, and `metafields` on customers |
-| **Orders** | GET calls | POST/PUT/DELETE | `orders`, `shipments`, and `metafields` on orders |
-| **Inventory** | GET calls | POST/PUT/DELETE | `inventory` |
-| **Information & Settings** | GET calls | POST/PUT/DELETE | `shipping` (zones and methods) |
+| Scope | Level needed | Covers |
+|---|---|---|
+| **Products** | read-only / modify | `products`, `variants`, `brands`, `categories`, `productOptions`, `images`, `priceLists` |
+| **Customers** | read-only / modify | `customers`, `customerGroups` |
+| **Orders** | read-only / modify | `orders`, `shipments` |
+| **Store Locations** | read-only | `inventory.getLocations()` |
+| **Store Inventory** | read-only / modify | `inventory.getItems()`, `inventory.setAbsolute()`, `inventory.adjustRelative()` |
+| **Information & settings** | read-only / modify | `shipping` (zones and methods) |
+| **Metafields Access** | Standard or full | `metafields` — **Standard** covers app-owned namespaces; **full** covers all namespaces including those created by other apps |
 
-> **Webhooks** do not require a separate scope — webhook management is available with any valid API account. Webhooks will only deliver events for resources covered by your account's existing scopes.
+> **Webhooks** do not have a dedicated scope. Webhook management works with any valid API account. Webhooks will only deliver events for resources covered by your account's other scopes.
 
 ### Recommended setup for a full Business Central integration
 
-If Business Central needs to both read and write across all modules, grant **Modify** on all five scopes above. If you have a read-only reporting connection, **Read-Only** on all five is sufficient.
+| Scope | Level |
+|---|---|
+| Products | modify |
+| Customers | modify |
+| Orders | modify |
+| Store Locations | read-only |
+| Store Inventory | modify |
+| Information & settings | modify |
+| Metafields Access | full |
 
-You'll need **one API account per store**. Each account generates its own store hash + access token pair, which maps to a single `registerStore()` call.
+You need **one API account per store**. Each account generates its own store hash + access token pair, which maps to a single `registerStore()` call.
 
 ---
 
