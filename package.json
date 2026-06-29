@@ -1,6 +1,6 @@
 {
   "name": "@mipod/bigcommerce",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Multi-tenant BigCommerce API client — connect multiple stores to a single Business Central environment",
   "main": "index.js",
   "publishConfig": {
