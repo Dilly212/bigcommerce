@@ -1,4 +1,5 @@
 const { registerStore } = require("./api/credentials");
+const { makeRequest } = require("./api/request");
 const products = require("./scripts/products");
 const brands = require("./scripts/brands");
 const categories = require("./scripts/category");
@@ -17,6 +18,7 @@ const shipping = require("./scripts/shipping");
 
 module.exports = {
   registerStore,
+  makeRequest,
   products,
   brands,
   categories,
