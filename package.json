@@ -1,0 +1,27 @@
+{
+  "name": "@mipod/bigcommerce",
+  "version": "1.0.0",
+  "description": "Multi-tenant BigCommerce API client — connect multiple stores to a single Business Central environment",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "bigcommerce",
+    "api",
+    "multi-tenant",
+    "ecommerce",
+    "business-central"
+  ],
+  "author": "mipod",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dilly212/bigcommerce.git"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "dotenv": "^16.0.0",
+    "form-data": "^4.0.0"
+  }
+}
