@@ -39,6 +39,28 @@ You can mix both options. Programmatic registration takes effect immediately and
 
 ---
 
+## Required API Permissions
+
+When creating an API account in BigCommerce (**Settings → API Accounts → Create API Account**), grant the following scopes. Use **Read-Only** if your integration only reads data; use **Modify** if it writes (create/update/delete).
+
+| BigCommerce Scope | Read-Only | Modify | Modules |
+|---|:---:|:---:|---|
+| **Products** | GET calls | POST/PUT/DELETE | `products`, `variants`, `brands`, `categories`, `productOptions`, `images`, `priceLists`, and `metafields` on products/variants/categories/brands |
+| **Customers** | GET calls | POST/PUT/DELETE | `customers`, `customerGroups`, and `metafields` on customers |
+| **Orders** | GET calls | POST/PUT/DELETE | `orders`, `shipments`, and `metafields` on orders |
+| **Inventory** | GET calls | POST/PUT/DELETE | `inventory` |
+| **Information & Settings** | GET calls | POST/PUT/DELETE | `shipping` (zones and methods) |
+
+> **Webhooks** do not require a separate scope — webhook management is available with any valid API account. Webhooks will only deliver events for resources covered by your account's existing scopes.
+
+### Recommended setup for a full Business Central integration
+
+If Business Central needs to both read and write across all modules, grant **Modify** on all five scopes above. If you have a read-only reporting connection, **Read-Only** on all five is sufficient.
+
+You'll need **one API account per store**. Each account generates its own store hash + access token pair, which maps to a single `registerStore()` call.
+
+---
+
 ## Usage
 
 Every method takes a **store code** as its first argument. This is the key used when registering the store (`'B2B'`, `'B2C'`, etc.).
